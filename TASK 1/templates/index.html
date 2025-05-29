@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News to Video with DeepSeek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Trending News to Video</h1>
+    <form method="POST" class="mb-4">
+        <div class="list-group mb-3">
+            {% for article in articles %}
+                <label class="list-group-item">
+                    <input type="radio" class="form-check-input me-1" name="article_idx" value="{{ loop.index0 }}" {% if selected_idx == loop.index0 %}checked{% endif %} required>
+                    <strong>{{ article.title }}</strong>
+                    <br>
+                    <small>{{ article.description }}</small>
+                </label>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Video</button>
+    </form>
+    {% if video_path %}
+        <div class="mt-4">
+            <h3>Generated Video:</h3>
+            <video controls width="100%">
+                <source src="{{ url_for('static', filename='output.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

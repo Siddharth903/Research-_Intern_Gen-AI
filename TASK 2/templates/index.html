@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SEO Blog Generator</title>
+</head>
+<body>
+    <h2>Select a Trending Product</h2>
+    <form method="POST">
+        {% for product in products %}
+            <div>
+                <input type="radio" name="product" value="{{ loop.index0 }}" required>
+                <strong>{{ product.name }}</strong>: {{ product.description }}
+            </div>
+        {% endfor %}
+        <button type="submit">Generate Blog Post</button>
+    </form>
+</body>
+</html>
